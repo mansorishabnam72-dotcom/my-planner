@@ -3,16 +3,446 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>برنامه‌ریز من</title>
+
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <h1>📅 برنامه‌ریز من</h1>
+<div class="app">
 
-  <p>
-    برنامه با موفقیت روی GitHub قرار گرفت.
-  </p>
+  <!-- Header -->
+  <header class="app-header">
+    <div>
+      <h1>📅 برنامه‌ریز من</h1>
+      <p>برنامه‌ریزی، یادآوری و پیشرفت</p>
+    </div>
+
+    <button class="notification-button" onclick="enableNotifications()">
+      🔔 فعال‌سازی اعلان‌ها
+    </button>
+  </header>
+
+
+  <!-- Calendar -->
+  <section class="card calendar-card">
+
+    <div class="calendar-header">
+
+      <button class="calendar-nav" onclick="changeMonth(-1)">
+        ‹
+      </button>
+
+      <div>
+        <h2 id="calendarMonth"></h2>
+        <p id="calendarMonthPersian"></p>
+      </div>
+
+      <button class="calendar-nav" onclick="changeMonth(1)">
+        ›
+      </button>
+
+    </div>
+
+
+    <div class="calendar-weekdays">
+
+      <div>Sun</div>
+      <div>Mon</div>
+      <div>Tue</div>
+      <div>Wed</div>
+      <div>Thu</div>
+      <div>Fri</div>
+      <div>Sat</div>
+
+    </div>
+
+
+    <div id="calendarDays" class="calendar-days"></div>
+
+
+    <div class="calendar-legend">
+
+      <span>
+        <i class="legend planned"></i>
+        برنامه دارد
+      </span>
+
+      <span>
+        <i class="legend completed"></i>
+        کامل شده
+      </span>
+
+      <span>
+        <i class="legend today"></i>
+        امروز
+      </span>
+
+    </div>
+
+  </section>
+
+
+  <!-- Day Navigation -->
+  <section class="card">
+
+    <div class="day-navigation">
+
+      <button class="nav-button" onclick="changeDay(-1)">
+        ← روز قبل
+      </button>
+
+      <button class="today-button" onclick="goToday()">
+        امروز
+      </button>
+
+      <button class="nav-button" onclick="changeDay(1)">
+        روز بعد →
+      </button>
+
+    </div>
+
+
+    <div class="selected-date-box">
+
+      <h2 id="selectedDate"></h2>
+
+    </div>
+
+  </section>
+
+
+  <!-- Daily Programs -->
+  <section class="card">
+
+    <div class="section-title">
+
+      <h2>📋 برنامه امروز</h2>
+
+      <span id="dailyCount"></span>
+
+    </div>
+
+    <div id="dailySchedules"></div>
+
+  </section>
+
+
+  <!-- Daily Score -->
+  <section class="card score-card">
+
+    <h2>⭐ امتیاز امروز</h2>
+
+    <div class="score-number">
+
+      <span id="todayScore">0</span>
+
+      <small>امتیاز</small>
+
+    </div>
+
+    <p id="scoreMessage">
+      برنامه‌هایت را انجام بده و امتیاز بگیر!
+    </p>
+
+  </section>
+
+
+  <!-- Level -->
+  <section class="card level-card">
+
+    <h2>🏆 سطح من</h2>
+
+    <div class="level-box">
+
+      <div class="level-icon" id="levelIcon">
+        🌱
+      </div>
+
+      <div>
+
+        <h3 id="levelName">
+          شروع کننده
+        </h3>
+
+        <p id="levelProgress"></p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- Daily Form -->
+  <section class="card">
+
+    <h2>➕ برنامه روزانه</h2>
+
+    <form id="dailyForm" onsubmit="saveDailySchedule(event)">
+
+      <input
+        id="dailyTitle"
+        type="text"
+        placeholder="عنوان برنامه"
+        required
+      >
+
+
+      <div class="form-row">
+
+        <div>
+
+          <label>ساعت</label>
+
+          <input
+            id="dailyTime"
+            type="time"
+            required
+          >
+
+        </div>
+
+
+        <div>
+
+          <label>نوع برنامه</label>
+
+          <select id="dailyType">
+
+            <option value="lesson">
+              📘 درس - 5 امتیاز
+            </option>
+
+            <option value="homework">
+              📝 تکلیف - 10 امتیاز
+            </option>
+
+            <option value="exam">
+              🧪 امتحان - 20 امتیاز
+            </option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+
+      <label>
+        ⏰ ساعت یادآوری
+      </label>
+
+      <input
+        id="dailyReminder"
+        type="time"
+      >
+
+
+      <label class="switch-row">
+
+        <input
+          id="dailyReminderEnabled"
+          type="checkbox"
+          checked
+        >
+
+        <span>
+          🔔 یادآوری فعال باشد
+        </span>
+
+      </label>
+
+
+      <div class="form-buttons">
+
+        <button
+          id="dailySaveButton"
+          class="main-button"
+          type="submit"
+        >
+          ➕ افزودن برنامه
+        </button>
+
+
+        <button
+          id="dailyCancelButton"
+          class="cancel-button"
+          type="button"
+          onclick="cancelDailyEdit()"
+          style="display:none;"
+        >
+          لغو
+        </button>
+
+      </div>
+
+    </form>
+
+  </section>
+
+
+  <!-- Weekly Programs -->
+  <section class="card">
+
+    <h2>🔁 برنامه هفتگی</h2>
+
+    <form
+      id="weeklyForm"
+      onsubmit="addWeeklySchedule(event)"
+    >
+
+      <input
+        id="weeklyTitle"
+        type="text"
+        placeholder="عنوان برنامه"
+        required
+      >
+
+
+      <div class="form-row">
+
+        <div>
+
+          <label>روز</label>
+
+          <select id="weeklyDay">
+
+            <option value="0">یکشنبه</option>
+            <option value="1">دوشنبه</option>
+            <option value="2">سه‌شنبه</option>
+            <option value="3">چهارشنبه</option>
+            <option value="4">پنجشنبه</option>
+            <option value="5">جمعه</option>
+            <option value="6">شنبه</option>
+
+          </select>
+
+        </div>
+
+
+        <div>
+
+          <label>ساعت</label>
+
+          <input
+            id="weeklyTime"
+            type="time"
+            required
+          >
+
+        </div>
+
+      </div>
+
+
+      <label>
+        نوع برنامه
+      </label>
+
+      <select id="weeklyType">
+
+        <option value="lesson">
+          📘 درس - 5 امتیاز
+        </option>
+
+        <option value="homework">
+          📝 تکلیف - 10 امتیاز
+        </option>
+
+        <option value="exam">
+          🧪 امتحان - 20 امتیاز
+        </option>
+
+      </select>
+
+
+      <label>
+        ⏰ ساعت یادآوری
+      </label>
+
+      <input
+        id="weeklyReminder"
+        type="time"
+      >
+
+
+      <label class="switch-row">
+
+        <input
+          id="weeklyReminderEnabled"
+          type="checkbox"
+          checked
+        >
+
+        <span>
+          🔔 یادآوری فعال باشد
+        </span>
+
+      </label>
+
+
+      <div class="form-buttons">
+
+        <button
+          id="weeklySaveButton"
+          class="main-button"
+          type="submit"
+        >
+          ➕ افزودن برنامه هفتگی
+        </button>
+
+
+        <button
+          id="weeklyCancelButton"
+          class="cancel-button"
+          type="button"
+          onclick="cancelWeeklyEdit()"
+          style="display:none;"
+        >
+          لغو
+        </button>
+
+      </div>
+
+    </form>
+
+  </section>
+
+
+  <!-- Weekly List -->
+  <section class="card">
+
+    <h2>📚 برنامه‌های هفتگی</h2>
+
+    <div id="weeklySchedules"></div>
+
+  </section>
+
+
+  <!-- Reminders -->
+  <section class="card">
+
+    <div class="section-title">
+
+      <h2>🔔 یادآوری‌ها</h2>
+
+      <span id="notificationStatus">
+        در حال بررسی...
+      </span>
+
+    </div>
+
+    <div id="reminders"></div>
+
+  </section>
+
+</div>
+
+
+<script src="script.js"></script>
 
 </body>
-</html>
+      </html>

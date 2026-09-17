@@ -1,50 +1,110 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>برنامه‌ریز من</title>
 
+  <!-- CSS -->
   <link rel="stylesheet" href="style.css">
+
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Theme Color -->
+  <meta name="theme-color" content="#123f73">
+
+  <!-- Mobile App -->
+  <meta name="mobile-web-app-capable" content="yes">
+
+  <meta
+    name="apple-mobile-web-app-capable"
+    content="yes"
+  >
+
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="default"
+  >
+
+  <meta
+    name="apple-mobile-web-app-title"
+    content="برنامه‌ریز"
+  >
+
 </head>
+
 
 <body>
 
 <div class="app">
 
+
   <!-- Header -->
+
   <header class="app-header">
+
     <div>
+
       <h1>📅 برنامه‌ریز من</h1>
-      <p>برنامه‌ریزی، یادآوری و پیشرفت</p>
+
+      <p>
+        برنامه‌ریزی، یادآوری و پیشرفت
+      </p>
+
     </div>
 
-    <button class="notification-button" onclick="enableNotifications()">
+
+    <button
+      class="notification-button"
+      onclick="enableNotifications()"
+    >
       🔔 فعال‌سازی اعلان‌ها
     </button>
+
   </header>
 
 
+
   <!-- Calendar -->
+
   <section class="card calendar-card">
 
     <div class="calendar-header">
 
-      <button class="calendar-nav" onclick="changeMonth(-1)">
+      <button
+        class="calendar-nav"
+        onclick="changeMonth(-1)"
+      >
         ‹
       </button>
 
+
       <div>
+
         <h2 id="calendarMonth"></h2>
+
         <p id="calendarMonthPersian"></p>
+
       </div>
 
-      <button class="calendar-nav" onclick="changeMonth(1)">
+
+      <button
+        class="calendar-nav"
+        onclick="changeMonth(1)"
+      >
         ›
       </button>
 
     </div>
+
 
 
     <div class="calendar-weekdays">
@@ -60,24 +120,40 @@
     </div>
 
 
-    <div id="calendarDays" class="calendar-days"></div>
+
+    <div
+      id="calendarDays"
+      class="calendar-days"
+    ></div>
+
 
 
     <div class="calendar-legend">
 
       <span>
+
         <i class="legend planned"></i>
+
         برنامه دارد
+
       </span>
 
+
       <span>
+
         <i class="legend completed"></i>
+
         کامل شده
+
       </span>
 
+
       <span>
+
         <i class="legend today"></i>
+
         امروز
+
       </span>
 
     </div>
@@ -85,24 +161,38 @@
   </section>
 
 
+
   <!-- Day Navigation -->
+
   <section class="card">
 
     <div class="day-navigation">
 
-      <button class="nav-button" onclick="changeDay(-1)">
+      <button
+        class="nav-button"
+        onclick="changeDay(-1)"
+      >
         ← روز قبل
       </button>
 
-      <button class="today-button" onclick="goToday()">
+
+      <button
+        class="today-button"
+        onclick="goToday()"
+      >
         امروز
       </button>
 
-      <button class="nav-button" onclick="changeDay(1)">
+
+      <button
+        class="nav-button"
+        onclick="changeDay(1)"
+      >
         روز بعد →
       </button>
 
     </div>
+
 
 
     <div class="selected-date-box">
@@ -114,7 +204,9 @@
   </section>
 
 
+
   <!-- Daily Programs -->
+
   <section class="card">
 
     <div class="section-title">
@@ -125,47 +217,66 @@
 
     </div>
 
+
     <div id="dailySchedules"></div>
 
   </section>
 
 
+
   <!-- Daily Score -->
+
   <section class="card score-card">
 
     <h2>⭐ امتیاز امروز</h2>
 
+
     <div class="score-number">
 
-      <span id="todayScore">0</span>
+      <span id="todayScore">
+        0
+      </span>
 
-      <small>امتیاز</small>
+      <small>
+        امتیاز
+      </small>
 
     </div>
 
+
     <p id="scoreMessage">
+
       برنامه‌هایت را انجام بده و امتیاز بگیر!
+
     </p>
 
   </section>
 
 
+
   <!-- Level -->
+
   <section class="card level-card">
 
     <h2>🏆 سطح من</h2>
 
+
     <div class="level-box">
 
-      <div class="level-icon" id="levelIcon">
+      <div
+        class="level-icon"
+        id="levelIcon"
+      >
         🌱
       </div>
+
 
       <div>
 
         <h3 id="levelName">
           شروع کننده
         </h3>
+
 
         <p id="levelProgress"></p>
 
@@ -176,12 +287,18 @@
   </section>
 
 
+
   <!-- Daily Form -->
+
   <section class="card">
 
     <h2>➕ برنامه روزانه</h2>
 
-    <form id="dailyForm" onsubmit="saveDailySchedule(event)">
+
+    <form
+      id="dailyForm"
+      onsubmit="saveDailySchedule(event)"
+    >
 
       <input
         id="dailyTitle"
@@ -195,7 +312,10 @@
 
         <div>
 
-          <label>ساعت</label>
+          <label>
+            ساعت
+          </label>
+
 
           <input
             id="dailyTime"
@@ -206,9 +326,13 @@
         </div>
 
 
+
         <div>
 
-          <label>نوع برنامه</label>
+          <label>
+            نوع برنامه
+          </label>
+
 
           <select id="dailyType">
 
@@ -216,9 +340,11 @@
               📘 درس - 5 امتیاز
             </option>
 
+
             <option value="homework">
               📝 تکلیف - 10 امتیاز
             </option>
+
 
             <option value="exam">
               🧪 امتحان - 20 امتیاز
@@ -231,9 +357,11 @@
       </div>
 
 
+
       <label>
         ⏰ ساعت یادآوری
       </label>
+
 
       <input
         id="dailyReminder"
@@ -249,11 +377,13 @@
           checked
         >
 
+
         <span>
           🔔 یادآوری فعال باشد
         </span>
 
       </label>
+
 
 
       <div class="form-buttons">
@@ -284,10 +414,15 @@
   </section>
 
 
+
   <!-- Weekly Programs -->
+
   <section class="card">
 
-    <h2>🔁 برنامه هفتگی</h2>
+    <h2>
+      🔁 برنامه هفتگی
+    </h2>
+
 
     <form
       id="weeklyForm"
@@ -306,26 +441,53 @@
 
         <div>
 
-          <label>روز</label>
+          <label>
+            روز
+          </label>
+
 
           <select id="weeklyDay">
 
-            <option value="0">یکشنبه</option>
-            <option value="1">دوشنبه</option>
-            <option value="2">سه‌شنبه</option>
-            <option value="3">چهارشنبه</option>
-            <option value="4">پنجشنبه</option>
-            <option value="5">جمعه</option>
-            <option value="6">شنبه</option>
+            <option value="0">
+              یکشنبه
+            </option>
+
+            <option value="1">
+              دوشنبه
+            </option>
+
+            <option value="2">
+              سه‌شنبه
+            </option>
+
+            <option value="3">
+              چهارشنبه
+            </option>
+
+            <option value="4">
+              پنجشنبه
+            </option>
+
+            <option value="5">
+              جمعه
+            </option>
+
+            <option value="6">
+              شنبه
+            </option>
 
           </select>
 
         </div>
 
 
+
         <div>
 
-          <label>ساعت</label>
+          <label>
+            ساعت
+          </label>
+
 
           <input
             id="weeklyTime"
@@ -338,9 +500,11 @@
       </div>
 
 
+
       <label>
         نوع برنامه
       </label>
+
 
       <select id="weeklyType">
 
@@ -348,9 +512,11 @@
           📘 درس - 5 امتیاز
         </option>
 
+
         <option value="homework">
           📝 تکلیف - 10 امتیاز
         </option>
+
 
         <option value="exam">
           🧪 امتحان - 20 امتیاز
@@ -359,9 +525,11 @@
       </select>
 
 
+
       <label>
         ⏰ ساعت یادآوری
       </label>
+
 
       <input
         id="weeklyReminder"
@@ -377,11 +545,13 @@
           checked
         >
 
+
         <span>
           🔔 یادآوری فعال باشد
         </span>
 
       </label>
+
 
 
       <div class="form-buttons">
@@ -412,22 +582,32 @@
   </section>
 
 
+
   <!-- Weekly List -->
+
   <section class="card">
 
-    <h2>📚 برنامه‌های هفتگی</h2>
+    <h2>
+      📚 برنامه‌های هفتگی
+    </h2>
+
 
     <div id="weeklySchedules"></div>
 
   </section>
 
 
+
   <!-- Reminders -->
+
   <section class="card">
 
     <div class="section-title">
 
-      <h2>🔔 یادآوری‌ها</h2>
+      <h2>
+        🔔 یادآوری‌ها
+      </h2>
+
 
       <span id="notificationStatus">
         در حال بررسی...
@@ -435,14 +615,57 @@
 
     </div>
 
+
     <div id="reminders"></div>
 
   </section>
 
+
 </div>
 
 
+
+<!-- Main JavaScript -->
+
 <script src="script.js"></script>
 
+
+
+<!-- Service Worker -->
+
+<script>
+
+if ("serviceWorker" in navigator) {
+
+  window.addEventListener("load", () => {
+
+    navigator.serviceWorker
+      .register("./service-worker.js")
+
+      .then(() => {
+
+        console.log(
+          "Service Worker registered successfully."
+        );
+
+      })
+
+      .catch(error => {
+
+        console.error(
+          "Service Worker registration failed:",
+          error
+        );
+
+      });
+
+  });
+
+}
+
+</script>
+
+
 </body>
-      </html>
+
+  </html>
